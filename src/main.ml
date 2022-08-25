@@ -18,8 +18,7 @@ let () =
   let font_surface = Surface.load_bmp "data/tom_vii_font.bmp" in
   let font_tex = Texture.create_from_surface renderer font_surface in
   (* END: font *)
-  let rec loop () =
-    let should_quit = poll_events () in
+  let draw () =
     Render.set_draw_color renderer (0, 0, 255) 255;
     Render.clear renderer;
     (* BEGIN: DRAW FONT *)
@@ -28,6 +27,12 @@ let () =
     Render.copy renderer ~texture:font_tex ~src_rect ~dst_rect ();
     (* END: DRAW FONT *)
     Render.render_present renderer;
+  in
+  (* Could put draw in loop, but currently no changes happen so it's 
+   * better performance to not draw every single frame. In future: dirty
+   * bit determines if we draw. *)
+  let rec loop () =
+    let should_quit = poll_events () in
     if should_quit then Sdl.quit () else loop ()
   in
   loop ()
