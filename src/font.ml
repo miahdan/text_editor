@@ -34,5 +34,4 @@ let rect_of_char self c =
   let idx = c |> int_of_char |> Array.get self.char_map in
   let x = start_x + w * (idx mod self.num_cols) in
   let y = start_y + (h * (idx / self.num_cols)) in
-  Printf.printf "%d %d %d %d\n" x y w h;
   Sdl.Rect.make4 x y w h

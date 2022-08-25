@@ -1,13 +1,11 @@
 open Sdl
 
-let handle_event = function
-  | Event.Quit _ -> true
-  | _ -> false
+let handle_event = function Event.Quit _ -> true | _ -> false
 
 let rec poll_events () =
   match Event.poll_event () with
   | None -> false
-  | Some event -> (handle_event event) || poll_events()
+  | Some event -> handle_event event || poll_events ()
 
 let () =
   let width, height = (1000, 800) in
@@ -16,7 +14,7 @@ let () =
     Render.create_window_and_renderer ~width ~height ~flags:[]
   in
   (* BEGIN: font *)
-  let font = Font.create (0,0) (11,17) " ABCD" 6 in
+  let font = Font.create (0, 17) (11, 17) " ABCD" 6 in
   let font_surface = Surface.load_bmp "data/tom_vii_font.bmp" in
   let font_tex = Texture.create_from_surface renderer font_surface in
   (* END: font *)
