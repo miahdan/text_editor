@@ -26,11 +26,12 @@ let () =
     let dst_rect = Rect.make4 100 100 100 100 in
     Render.copy renderer ~texture:font_tex ~src_rect ~dst_rect ();
     (* END: DRAW FONT *)
-    Render.render_present renderer;
+    Render.render_present renderer
   in
   (* Could put draw in loop, but currently no changes happen so it's 
    * better performance to not draw every single frame. In future: dirty
    * bit determines if we draw. *)
+  draw ();
   let rec loop () =
     let should_quit = poll_events () in
     if should_quit then Sdl.quit () else loop ()
